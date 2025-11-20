@@ -1,0 +1,127 @@
+<div class="bg">
+<h2 class="title"><?= htmlspecialchars($caption ?? 'Создание поста') ?></h2>
+<form id="post-form" action="?page=create" method="post" autocomplete="off" enctype="multipart/form-data">
+    <label for="title">Заголовок:</label><br>
+    <input
+        type="text"
+        name="title"
+        id="title"
+        value="<?= htmlspecialchars($title ?? '') ?>"
+        required
+        autocomplete="off"
+        aria-label="Заголовок поста"
+    ><br><br>
+
+    <?php if (isset($errors['title']) && !empty($errors['title'])): ?>
+        <div class="error-container">
+            <span class="error"><?= htmlspecialchars($errors['title']) ?></span>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($errors['banned']) && !empty($errors['banned'])): ?>
+        <div class="error-container">
+            <span class="error"><?= htmlspecialchars($errors['banned']) ?></span>
+        </div>
+    <?php endif; ?>
+
+    <label for="category_id">Маршрут:</label><br>
+    <select
+        name="category_id"
+        id="category_id"
+        required
+        aria-label="Выберите маршрут"
+    >
+        <option value="">Выбрать часть света</option>
+        <?php foreach ($categories as $id => $name): ?>
+            <option
+                value="<?= $id ?>"
+                <?= ($category_id ?? 0) == $id ? 'selected' : '' ?>
+            >
+                <?= htmlspecialchars($name ?? '') ?>
+            </option>
+        <?php endforeach; ?>
+    </select><br><br>
+
+    <?php if (isset($errors['category_id']) && !empty($errors['category_id'])): ?>
+        <div class="error-container">
+            <span class="error"><?= htmlspecialchars($errors['category_id']) ?></span>
+        </div>
+    <?php endif; ?>   
+
+    <label for="text">Содержание:</label><br>
+    <textarea
+        name="text"
+        id="text"
+        rows="15"
+        cols="75"
+        required
+        autocomplete="off"
+        aria-label="Текст поста"
+    ><?= htmlspecialchars($text ?? '') ?></textarea><br><br>
+
+    <?php if (isset($errors['text']) && !empty($errors['text'])): ?>
+        <div class="error-container">
+            <span class="error"><?= htmlspecialchars($errors['text']) ?></span>
+        </div>
+    <?php endif; ?>
+
+     <?php if (isset($errors['banned']) && !empty($errors['banned'])): ?>
+        <div class="error-container">
+            <span class="error"><?= htmlspecialchars($errors['banned']) ?></span>
+        </div>
+    <?php endif; ?>
+
+    <button class="create-btn" type="submit">Создать</button>
+</form>
+
+<?php if (!empty($message)): ?>
+    <div class="toast-message toast-<?= htmlspecialchars($message_type) ?>"
+        role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+            <?= htmlspecialchars($message) ?? '' ?>
+        </div>
+        <button type="button" class="close-toast">&times;</button>
+    </div>
+<?php endif; ?>
+</div>
+
+
+
+
+<script>
+
+'use ctrict';
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toast = document.querySelector('.toast-message');
+    
+    if (toast) {
+        // 1. Показываем сообщение с анимацией
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+        }, 100); // Небольшая задержка для плавного появления
+        
+        // 2. Автоматически скрываем через 4 секунды
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            
+            // Удаляем элемент после анимации
+            setTimeout(() => toast.remove(), 400);
+        }, 4000); // 4 секунды показа
+        
+        // 3. Ручное закрытие по клику на ×
+        const closeBtn = toast.querySelector('.close-toast');
+        closeBtn.addEventListener('click', () => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            setTimeout(() => toast.remove(), 400);
+        });
+    }
+});
+</script>
+
+
+
+

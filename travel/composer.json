@@ -1,0 +1,40 @@
+{
+    "name": "domains/travel",
+    "autoload": {
+        "files": [
+            "config/app.php",
+            "core/render.php",
+            "controllers/mainController.php",
+            "controllers/createPostController.php",
+            "controllers/brCreateController.php",
+            "controllers/menuController.php",
+            "controllers/createPostContentController.php",
+            "controllers/mainContentController.php",
+            "controllers/brMainController.php",
+            "controllers/brPostsController.php",
+            "controllers/brPostController.php",
+            "controllers/brCalcController.php",
+            "controllers/postsController.php",
+            "controllers/postController.php",
+            "controllers/calcController.php",
+            "models/createPostModel.php",
+            "models/calcModel.php",
+            "models/postModel.php",
+            "models/menuModel.php",
+            "models/mainContentModel.php",
+            "models/createPostContentModel.php",
+            "models/brCreateModel.php",
+            "models/brMainModel.php",
+            "models/brPostsModel.php",
+            "models/brPostModel.php",
+            "models/brCalcModel.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Елена",
+            "email": "n.a.092024@yandex.ru"
+        }
+    ],
+    "require": {}
+}

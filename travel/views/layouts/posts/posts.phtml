@@ -1,0 +1,38 @@
+<div class="title-post">
+    <h2 class="title">Мои путешествия: истории и открытия</h2>
+    <a class="create-btn" href="<?=BASE_URL?>?page=create">Создать пост</a>
+</div>
+<div class="posts-content">
+    <?php if (!empty($data['posts'])): ?>
+        <?php foreach ($data['posts'] as $post): ?>
+        <div class="card">
+            <a class="card-title" href="?page=post&id=<?= (int)$post['id'] ?>">
+                Пост №<?= htmlspecialchars($post['id']) ?>
+            </a>
+            <p class="card-title"><?= htmlspecialchars($post['title']) ?></p>
+            <p class="card-category">
+                <?php
+                $categories = [
+                    1 => 'Австралия и Океания',
+                    2 => 'Антарктида',
+                    3 => 'Азия',
+                    4 => 'Африка',
+                    5 => 'Америка',
+                    6 => 'Европа'
+                ];
+                echo $categories[$post['category_id']] ?? 'Ошибка!';
+                ?>
+            </p>
+            <?php if (!empty($post['text'])): ?>
+                <a class="card-text" href="?page=post&id=<?= (int)$post['id'] ?>">Текст</a>
+            <?php endif; ?>
+            <p class="card-date"><?= htmlspecialchars($post['created_at']) ?></p>
+        </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Нет постов для отображения</p>
+    <?php endif; ?>
+</div>
+
+
+

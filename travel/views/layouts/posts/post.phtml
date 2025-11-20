@@ -1,0 +1,41 @@
+<?php
+if (!is_null($data)):?>
+    <div class="card-post">
+        <p class="card-title"><?= htmlspecialchars($data['title'])?></p><br>
+        <p class="card-category">
+            <?php switch ($data['category_id']):
+                case "1":
+                    echo 'Австралия и Океания';
+                    break;
+                case "2":
+                    echo 'Антарктида';
+                    break;
+                case "3":
+                    echo 'Азия';
+                    break;
+                case "4":
+                    echo 'Африка';
+                    break;
+                case "5":
+                    echo 'Америка';
+                    break;
+                case "6":
+                    echo 'Европа';
+                    break;
+                default:
+                    echo 'Ошибка!';
+            endswitch; ?>
+        </p><br>
+        <?php if (!empty($data['text'])): ?>
+            <p class="card-text" href="?page=post&id=<?=(int)$data['id']?>">
+                <?= htmlspecialchars($data['text']) ?>
+            </p><br>
+        <?php endif;?>
+        <br>
+        <p class="card-date" ?>
+            <?=htmlspecialchars($data['created_at'])?>
+        </p>
+    </div>
+<?php else:?>
+    Нет поста
+<?php endif;?>
